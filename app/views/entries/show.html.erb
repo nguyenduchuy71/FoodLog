@@ -1,0 +1,43 @@
+<% content_for :title do %>
+  <%= @entry.meal_type %> &ndash; <%= DateTime.now.to_s(:nice_date) %>
+  <%= @entry.category.title %>
+<% end %>
+
+<div class="columns mt-6 is-centered">
+  <div class="column is-one-third">
+    <nav class="panel is-link">
+      <p class="panel-heading has-text-centered">
+        <%= @entry.meal_type %>
+      </p>
+
+      <div class="panel-block">
+        <strong>Calory: </strong>
+        <%= @entry.calories %>
+      </div>
+
+      <div class="panel-block">
+        <strong>Protien: </strong>
+        <%= @entry.protiens %>
+      </div>
+
+      <div class="panel-block">
+        <strong>Carbohydrat: </strong>
+        <%= @entry.carbohydrates %>
+      </div>
+
+      <div class="panel-block">
+        <strong>Fat: </strong>
+        <%= @entry.fats %>
+      </div>
+    </nav>
+
+    <div class="is-mobile">
+      <div class="is-flex is-align-content-stretch">
+        <%= link_to 'Edit', edit_entry_path(@entry), class: "button is-primary" %>
+        <%= button_to 'Delete', entry_path(@entry), method: :delete,
+          data: { confirm: 'Are you sure?' },
+          class: "button is-danger ml-4" %>
+      </div>
+    </div>
+  </div>
+</div>

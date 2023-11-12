@@ -1,0 +1,39 @@
+<% content_for :title do %>
+  FoodLog &ndash; <%= DateTime.now.to_s(:nice_date) %>
+<% end %>
+
+<div class="columns mt-6">
+  <% @entries.each do |entry| %>
+    <% cache entry do %>
+      <div class="column is-one-quarter">
+        <div class="card mt-4">
+          <header class="card-header">
+            <p class="card-header-title"><%= entry.meal_type %> :
+            <%= entry.category.title if entry.category.present? %></p>
+          </header>
+          <div class="card-content">
+            <div class="content">
+              <p><span class="has-text-weight-bold"> <%= entry.calories %> </span>calories</p>
+              <p><span class="has-text-weight-bold"> <%= entry.protiens %> </span>grams of protiens</p>
+              <p><span class="has-text-weight-bold"> <%= entry.carbohydrates %> </span>grams of carbohydrates</p>
+              <p><span class="has-text-weight-bold"> <%= entry.fats %> </span>grams of fats</p>
+              <p class="italic">Logged <%= time_ago_in_words(entry.created_at) %> ago</p>
+            </div>
+          </div>
+          <div class="card-footer">
+            <div class="card-footer-item">
+              <%= link_to 'View', entry %>
+            </div>
+            <div class="card-footer-item">
+              <%= link_to 'Edit', edit_entry_path(entry) %>
+            </div>
+          </div>
+        </div>
+      </div>
+    <% end %>
+  <% end %>
+</div>
+
+<div class="columns is-centered my-6">
+  <%= link_to 'View all entries', archives_index_path, class: 'button is-link is-outlined is-centered' %>
+</div>
